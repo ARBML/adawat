@@ -1,0 +1,97 @@
+<nav class="flex justify-between items-center h-16 lg:h-20 w-full px-4 lg:px-8">
+  <div class="flex gap-8 justify-between items-center">
+    <h2 class="font-bold text-xl lg:text-2xl text-[#F95959]">
+      <a href="{{ site.baseurl }}/" class="hover:text-inherit">Masader+</a>
+    </h2>
+    <ul class="md:flex items-center gap-4 hidden">
+      {% for item in site.data.page.nav.tabs %}
+      <li>
+        <a
+          href="{% if item.url contains '://' %} {{ item.url }} {% else %} {{ site.baseurl }}{{item.url}} {% endif %}"
+          class="capitalize font-bold text-black hover:underline hover:text-black"
+          {% if item.url contains '://' %}target="_blank" {% endif %}
+        >
+          {{ item.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="flex items-center gap-4">
+    <form action="./search" class="hidden md:block">
+      <label
+      class="px-3 border-2 border-black/25 bg-black/[.02] rounded-md flex items-center"
+    >
+      <input
+        class="focus:outline-none w-full py-1 bg-transparent w-52"
+        type="text"
+        name="name"
+        placeholder="Search through datasets"
+      />
+      <i class="fa-solid fa-magnifying-glass text-black/25"></i>
+    </label>
+    </form>
+    <ul class="flex gap-8 items-center">
+      <li class="block md:hidden navigation-mobile-menu-toggle">
+        <i class="fa-solid fa-ellipsis"></i>
+      </li>
+      <li class="hidden md:block">
+        <a target="_blank" href="https://discord.gg/aN2vaec9nV">
+          <i class="fa-brands fa-discord fa-lg hover:text-blue-500"></i>
+        </a>
+      </li>
+      <li class="hidden md:block">
+        <a target="_blank" href="https://github.com/ARBML/masader">
+          <i class="fa-brands fa-github fa-xl hover:text-black"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<ul
+  class="navigation-mobile-menu flex w-full hidden flex-col border border-black gap-8 p-4 md:hidden"
+>
+<li>
+  <form action="./search">
+    <label
+    class="px-3 border-2 border-black/25 bg-black/[.02] rounded-md flex items-center"
+  >
+    <input
+      class="focus:outline-none w-full py-1 bg-transparent"
+      type="text"
+      name="name"
+      placeholder="Search through datasets"
+    />
+    <i class="fa-solid fa-magnifying-glass text-black/25"></i>
+  </label>
+  </form>
+</li>
+  <li>
+    <ul class="flex justify-center flex-col items-center gap-4">
+      {% for item in site.data.page.nav.tabs %}
+      <li>
+        <a
+          href="{% if item.url contains '://' %} {{ item.url }} {% else %} {{ site.baseurl }}{{item.url}} {% endif %}"
+          class="capitalize font-medium"
+        >
+          {{ item.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+  <li>
+    <ul class="flex justify-center gap-8 items-center">
+      <li>
+        <a target="_blank" href="https://discord.gg/aN2vaec9nV">
+          <i class="fa-brands fa-discord text-blue-500"></i>
+        </a>
+      </li>
+      <li>
+        <a target="_blank" href="https://github.com/ARBML/masader">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
