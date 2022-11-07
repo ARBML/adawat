@@ -212,7 +212,7 @@ axios
                 1: index + 1,
                 2: linkuize(row['Name'], row["Link"], false),
                 3: createColab(row["Colab link"]),
-                4: row['Release Year'],
+                4: parseInt(row['Release Year']),
                 5: row["License"],
                 6: row["Version"],
                 7: row["Programming Language"],
