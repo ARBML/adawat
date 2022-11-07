@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap);
 
 :root {
-    --main-color: #f95959;
+    --main-color: #be2596;
     --second-color: #fb8a8a;
     --bs-font-sans-serif: 'Cairo', 'Open Sans', -apple-system,
         BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif,
@@ -749,7 +749,7 @@ svg {
 
 th {
     color: #ffffff;
-    background-color: #F95959 !important;
+    background-color: #be2596 !important;
     padding: 2px 5px;
     /* border-radius: 15px; */
     background-color: blue;
@@ -763,11 +763,11 @@ td {
 th:first-child {
     border-radius: 3px 0 0 0;
     padding-left: 11px !important;
-    border-left: solid 1px #F95959;
+    border-left: solid 1px #be2596;
 }
 td:first-child {
     padding-left: 11px !important;
-    border-left: solid 1px #F95959;
+    border-left: solid 1px #be2596;
     border-top-left-radius: 0;
 }
 th:first-child {
@@ -776,7 +776,7 @@ th:first-child {
 
 td:last-child {
     padding-right: 11px !important;
-    border-right: solid 1px #F95959;
+    border-right: solid 1px #be2596;
     border-top-right-radius: 0;
 }
 th:last-child {
@@ -829,7 +829,7 @@ td > i, td> i {
 }
 
 .home-heading{
-    color: #F95959;
+    color: #be2596;
 }
 
 .bg-heading{
@@ -883,7 +883,7 @@ td > i, td> i {
 }
 
 .table a {
-    color: #F95959;
+    color: #be2596;
 }
 
 .table > :not(caption) > * > * {

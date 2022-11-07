@@ -1,19 +1,10 @@
-const url = 'https://masader-web-service.herokuapp.com/datasets';
-const contributers_url = 'https://masader-web-service.herokuapp.com/datasets/tags?features=Added By'
+const url = 'https://web-production-a8ed.up.railway.app/datasets';
+const contributers_url = 'https://web-production-a8ed.up.railway.app/datasets/tags?features=Added By'
 
 function linkuize(text, link, short = true) {
     if (link != undefined && link != 'nan')
         return `<a href = "${link}" target="_blank" class="#${(short) ? "shorterText " : ""}underline"> ${text}</a>`;
     else return 'Not Available';
-}
-
-function getCountry(text) {
-    text = text.split('(');
-    text = text[text.length - 1].split(')')[0];
-    if (text == 'Modern Standard Arabic') {
-        return 'MSA';
-    }
-    return text;
 }
 
 function getIcon(text) {
@@ -37,6 +28,11 @@ function itemize(text) {
     return output;
 }
 
+function createColab(link){
+    return `<a href=${link}>
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" width = '400px' >
+  </a>`
+}
 function badgeRender(text) {
     text = text.toString().toLowerCase();
     if (text.toLowerCase() == 'free')
@@ -60,15 +56,6 @@ async function getDetails(id) {
 }
 
 async function getOGimage(url) {
-    // return axios.get(url).then(response => {
-    //     let patren = /<meta property="og:image" content="(.*?)" \/>/g
-    //     for (const match of response.data.matchAll(patren)) {
-    //         return match[1]
-    //     }
-    // }).catch(() => {
-    //     return "./assets/images/logo.png"
-    // })
-
     if (url.includes("github"))
     {
         let owner = url.split("/")
@@ -100,19 +87,19 @@ async function fomratDetails(data, index){
                     '</div>'+
                     ' <div class="grid grid-cols-2">'+
                         '<span class=" text-gray-400">Created At</span>'+
-                        '<span class=" text-gray-800">'+data['Year'] +'</span>'+
+                        '<span class=" text-gray-800">'+data['Release Year'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2 ">'+
-                        '<span class="text-gray-400">Volume</span>'+
-                        '<span class="text-gray-800">'+data['Volume'] +'</span>'+
+                        '<span class="text-gray-400">Version</span>'+
+                        '<span class="text-gray-800">'+data['Version'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Unit</span>'+
-                        '<span class="text-gray-800">'+data['Unit'] +'</span>'+
+                        '<span class="text-gray-400">Accessibility</span>'+
+                        '<span class="text-gray-800">'+data['UnAccessibilityit'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Language</span>'+
-                        '<span class="text-gray-800">'+data['Language'] +'</span>'+
+                        '<span class="text-gray-400">Supported language(s)</span>'+
+                        '<span class="text-gray-800">'+data['Supported language(s)'] +'</span>'+
                     '</div>'+
                     ' <div class=" grid grid-cols-2 ">'+
                         '<span class="text-gray-400">License</span>'+
@@ -120,51 +107,35 @@ async function fomratDetails(data, index){
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
                         '<span class="text-gray-400">Accessibility</span>'+
-                        '<span class="text-gray-800">'+data['Access'] +'</span>'+
+                        '<span class="text-gray-800">'+data['Accessibility'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
                         '<span class="text-gray-400">Tasks</span>'+
                         '<span class="text-gray-800">'+data['Tasks'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Dialect</span>'+
-                        '<span class="text-gray-800">'+data['Dialect'] +'</span>'+
+                        '<span class="text-gray-400">Language</span>'+
+                        '<span class="text-gray-800">'+data['Programming Language'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Domain</span>'+
-                        '<span class="text-gray-800">'+data['Domain'] +'</span>'+
+                        '<span class="text-gray-400">GitHub Repo</span>'+
+                        '<span class="text-gray-800">'+data['GitHub Repo'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Form</span>'+
-                        '<span class="text-gray-800">'+data['Form'] +'</span>'+
+                        '<span class="text-gray-400">Pricing</span>'+
+                        '<span class="text-gray-800">'+data['Pricing'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Collection Style</span>'+
-                        '<span class="text-gray-800">'+data['Collection Style'] +'</span>'+
+                        '<span class="text-gray-400">Tool Type</span>'+
+                        '<span class="text-gray-800">'+data['Tool Type'] +'</span>'+
                     '</div>'+
                     ' <div class=" grid grid-cols-2 ">'+
-                        '<span class="text-gray-400">Provider</span>'+
-                        '<span class="text-gray-800">'+data['Provider'] +'</span>'+
+                        '<span class="text-gray-400">Interface</span>'+
+                        '<span class="text-gray-800">'+data['Interface'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Script</span>'+
-                        '<span class="text-gray-800">'+data['Script'] +'</span>'+
-                    '</div>'+
-                    ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Tokenized</span>'+
-                        '<span class="text-gray-800">'+data['Tokenized'] +'</span>'+
-                    '</div>'+
-                    ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Host</span>'+
-                        '<span class="text-gray-800">'+data['Host'] +'</span>'+
-                    '</div>'+
-                    ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Cost</span>'+
-                        '<span class="text-gray-800">'+(data['Cost'] != 'nan' ? row['Cost'] : 'Not Available') +'</span>'+
-                    '</div>'+
-                    ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Test Split</span>'+
-                        '<span class="text-gray-800">'+data['Test Split'] +'</span>'+
+                        '<span class="text-gray-400">Evaluated datasets</span>'+
+                        '<span class="text-gray-800">'+data['Evaluated datasets'] +'</span>'+
                     '</div>'+
                 '</div>'+
                 '<div class="collapse-footer flex justify-end gap-x-5 mt-7">'+
@@ -198,11 +169,11 @@ axios
         let headersWhiteList = [
             'No.',
             'Name',
-            'Link',
+            'Colab Link',
             'Year',
-            'Dialect',
-            'Volume',
-            'Unit',
+            'License',
+            'Version',
+            'Language',
             'Paper Link',
             'Access',
             'Tasks',
@@ -239,14 +210,14 @@ axios
             dataset.push({
                 0: index + 1,
                 1: index + 1,
-                2: linkuize(row['Name'], `card?id=${index+1}`, false),
-                3: link_host,
-                4: row['Year'],
-                5: getCountry(row['Dialect'] != 'nan' ? row['Dialect'].charAt(0).toUpperCase() + row['Dialect'].slice(1) : ''),
-                6: row['Volume'] != 'nan' ? row['Volume'] : '',
-                7: row['Unit'] != 'nan' ? row['Unit'].charAt(0).toUpperCase() + row['Unit'].slice(1) : '',
-                8: linkuize(row['Paper Title'], row['Paper Link']),
-                9: badgeRender(row['Access']),
+                2: linkuize(row['Name'], row["Link"], false),
+                3: createColab(row["Colab link"]),
+                4: row['Release Year'],
+                5: row["License"],
+                6: row["Version"],
+                7: row["Programming Language"],
+                8: linkuize(row['Paper Title'], row['Paper URL']),
+                9: badgeRender(row['Pricing']),
                 10: itemize(row['Tasks']),
             });
         }
@@ -278,16 +249,6 @@ axios
                 },
                 order: [[1, 'asc']],
                 searching: true
-                // "columnDefs": [
-                //   {
-                //       "targets": 9,
-                //       "render": function ( data, type, row ) {
-                //         console.log(data)
-                //         //   if (data == "free") return badgeRender(row['Access'])
-                //       }
-                //   },
-                // ]
-                
               });
           
              // opening and closing details

@@ -257,9 +257,9 @@ form.addEventListener("submit", (event) => {
                 "bg-black/[.02]",
                 "border-black/50",
                 "text-black/50",
-                "bg-[#F95959]/50",
-                "border-[#F95959]",
-                "text-[#F95959]",
+                "bg-[#be2596]/50",
+                "border-[#be2596]",
+                "text-[#be2596]",
               ].forEach((className) => element.classList.toggle(className));
               submit();
             });
@@ -344,9 +344,9 @@ document.querySelector("#reset").addEventListener("click", () => {
 
     if (isChecked)
       element.classList.remove(
-        "bg-[#F95959]/50",
-        "border-[#F95959]",
-        "text-[#F95959]"
+        "bg-[#be2596]/50",
+        "border-[#be2596]",
+        "text-[#be2596]"
       );
 
     element.classList.add("bg-black/[.02]", "border-black/50", "text-black/50");
