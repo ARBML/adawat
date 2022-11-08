@@ -1,4 +1,4 @@
-let url = 'https://masader-web-service.herokuapp.com/datasets/';
+let url = 'https://web-production-a8ed.up.railway.app/datasets/';
 
 function recaptchaChange(){
     let recaptcha_box_checked = (grecaptcha.getResponse()) ? true : false;
@@ -83,29 +83,7 @@ axios
     .then(function (response) {
         let headers = [];
         let headersWhiteList = [
-            'Name',
-            'Link',
-            'Year',
-            'Volume',
-            'Unit',
-            'Paper Link',
-            'Access',
-            'Tasks',
-            'License',
-            'Language',
-            'Dialect',
-            'Domain',
-            'Form',
-            'Collection Style',
-            'Ethical Risks',
-            'Provider',
-            'Derived From',
-            'Script',
-            'Tokenized',
-            'Host',
-            'Cost',
-            'Test Split',
-            'Subsets',
+            "Id","Name","Link","Colab link","GitHub Repo","Pricing","Accessibility","License","Version","Description","Paper Title","Paper URL","Release Year","Tasks","Supported language(s)","Tool Type","Interface","Programming Language","Evaluated datasets","Cluster","Embeddings"
         ];
 
         $('.loading-spinner').hide();
@@ -137,7 +115,8 @@ axios
                 value = ethicalBadge(value); // calling "ethicalBadge" function to put some style to the value
             } else if (
                 element.title == 'Link' ||
-                element.title == 'Paper Link'
+                element.title == 'Paper URL' ||
+                element.title == 'Colab link'
             ) {
                 value = linkuize(value, value);
             } else if (element.title == 'Subsets') {

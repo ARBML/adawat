@@ -1,6 +1,6 @@
-var url = "https://masader-web-service.herokuapp.com/datasets";
+var url = "https://web-production-a8ed.up.railway.app/datasets";
 var urlEmbClus =
-  "https://masader-web-service.herokuapp.com/datasets?features=Cluster,Embeddings";
+  "https://web-production-a8ed.up.railway.app/datasets?features=Cluster,Embeddings";
 
 function reformat_numbers(num) {
   if (num === undefined) return "";
@@ -35,7 +35,7 @@ function createHtml(i) {
   let div = '<div style="font-family: Cairo, "Open Sans"> ';
   let table = '<table style="border-collapse: collapse; border: none;">';
   let html_out = div + table;
-  let list_to_show = ["Name", "Year", "Dialect", "Volume", "Tasks"];
+  let list_to_show = ["Name", "Version", "Programming Language", "Tasks"];
   for (let j = 0; j < list_to_show.length; j += 1) {
     let index_to_header = headersWhiteList.indexOf(list_to_show[j]);
     let header = headersWhiteList[index_to_header];
@@ -84,21 +84,16 @@ axios
     let rowData = response.data;
 
     headersWhiteList = [
-      "Name",
-      "Link",
-      "License",
-      "Year",
-      "Language",
-      "Dialect",
-      "Domain",
-      "Form",
-      "Volume",
-      "Unit",
-      "Ethical Risks",
-      "Script",
-      "Access",
-      "Tasks",
-      "Venue Type",
+      'Id',
+      'Name',
+      'Colab Link',
+      'Released Year',
+      'License',
+      'Version',
+      'Programming Language',
+      'Paper URL',
+      'Accessability',
+      'Tasks',
     ];
     $(".loading-spinner").hide();
 

@@ -1,8 +1,8 @@
 nav:
     logo: /assets/images/logo.png
-    title: Arabic NLP Data Catalouge
+    title: Arabic NLP Tools Catalouge
     tabs:
         - title: Stats
           url: /stats
         - title: Contribute
-          url: https://forms.gle/JnMrJjHumT6ktK9cA
+          url: https://docs.google.com/forms/d/e/1FAIpQLScj-kGwZiniqjYk82z_yeqEgM7xtJ3Kfl1a2ITfgkMtKkVt0g/viewform

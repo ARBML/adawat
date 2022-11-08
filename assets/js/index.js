@@ -210,7 +210,7 @@ axios
             dataset.push({
                 0: index + 1,
                 1: index + 1,
-                2: linkuize(row['Name'], row["Link"], false),
+                2: linkuize(row['Name'], `card.html?id=${row['Id']}`, false),
                 3: createColab(row["Colab link"]),
                 4: parseInt(row['Release Year']),
                 5: row["License"],

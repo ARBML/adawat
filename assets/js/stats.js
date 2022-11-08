@@ -1,4 +1,4 @@
-var url = 'https://masader-web-service.herokuapp.com/datasets';
+var url = 'https://web-production-a8ed.up.railway.app/datasets';
 
 let headersWhiteList;
 let dataset;
@@ -6,18 +6,12 @@ let myChart = null;
 let dialectedEntries = {};
 
 titles = {
-    Host: 'Repositories used for hosting Arabic NLP datasets',
-    Year: 'Number of datasets published every year',
-    Access: 'Accessability of datasets',
-    Tasks: 'Top 20 tasks in the published Arabic NLP datasets',
-    Domain: 'Domains in Arabic NLP datasets',
+    'Release Year': 'Number of tools published every year',
+    Tasks: 'Top 20 tasks solved by tools',
     License: 'Linceses used in Arabic NLP datasets',
-    Form: 'Text vs Spoken datasets',
-    Dialects: 'Percetnages of the resources with respect of each country',
-    // 'Dialects Groups': 'Distribution of the resources with respect of each Dialect',
-    'Venue': 'Venues used to publish NLP datasets',
-    'Ethical Risks': 'Ethical risks of Arabic NLP datasets',
-    Script: 'Scripts of writing Arabic NLP datasets',
+    Pricing: 'Venues used to publish NLP datasets',
+    'GitHub Repo': 'Number of tools that have a GitHub repo',
+    'Programming Language': 'Programming Languages used to create tools'
 };
 
 function decodeDialect(dialect) {
@@ -35,7 +29,7 @@ function getSeries(data, idx, ignoreOther = true, subsetsIdx = -1) {
                 continue;
         }
 
-        if (headersWhiteList[idx] == 'Tasks') {
+        if (headersWhiteList[idx] == 'Tasks' || headersWhiteList[idx] == 'Programming Language') {
             let tasks = data[index][idx].split(',');
             for (let index = 0; index < tasks.length; index++) {
                 series.push(tasks[index].trim());
@@ -158,13 +152,8 @@ function createChartContaier(title) {
 
   container.appendChild(canvas);
 
-  if (title === 'Venue')
-    groupedBar(canvas);
-  else if (title === 'Dialects')
-    createDialectVolumePieChart(getCountriesSubset(dialectedEntries), canvas);
-  // else if (title === 'Dialects Groups')
-  //   createDialectVolumePieChart(getDialectsSubset(dialectedEntries), canvas);
-  else if (title === 'Year')
+
+  if (title === 'Release Year')
     plotBar(title, canvas, sorting = false, truncate = 30);
   else 
     plotBar(title, canvas)
@@ -294,31 +283,11 @@ axios
         let rowData = response.data;
 
         headersWhiteList = [
-            'License',
-            'Year',
-            'Language',
-            'Dialect',
-            'Domain',
-            'Form',
-            'Ethical Risks',
-            'Script',
-            'Host',
-            'Access',
-            'Tasks',
-            'Venue Type',
-            'Subsets',
+          "Id","Name","Link","Colab link","GitHub Repo","Pricing","Accessibility","License","Version","Description","Paper Title","Paper URL","Release Year","Tasks","Supported language(s)","Tool Type","Interface","Programming Language","Evaluated datasets","Cluster","Embeddings"
         ];
-        headersWhiteList = headersWhiteList.concat([
-            'Name',
-            'Link',
-            'Volume',
-            'Unit',
-            'Paper Link',
-        ]);
 
         $('.loading-spinner').hide();
 
-        const subsetsIdx = headersWhiteList.indexOf('Subsets');
 
         // Grabbing row's values
         dataset = [];
@@ -327,11 +296,8 @@ axios
             record = {};
 
             for (let j = 0; j < headersWhiteList.length; j++)
-                if (j != subsetsIdx)
-                    record[j] = String(rowData[i][headersWhiteList[j]]);
-                else record[j] = rowData[i][headersWhiteList[j]];
+                record[j] = rowData[i][headersWhiteList[j]];
 
-            extractDilects({ index: i + 1, ...rowData[i] });
             dataset.push(record);
         }
         const chartsContainer = document.getElementById('chartsContainer');

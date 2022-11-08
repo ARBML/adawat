@@ -41,6 +41,6 @@ bundle install
 6. Create your changes branch.
 7. Make your changes.
 8. Run the site locally with `bundle exec jekyll serve`.
-9. Preview Masader site on your web browser by navigate to `http://127.0.0.1:4000/masader/`.
+9. Preview adawat site on your web browser by navigate to `http://127.0.0.1:4000/adawat/`.
 10. Commit and push the changes to your fork repository.
 11. Open a pull request of your changes.

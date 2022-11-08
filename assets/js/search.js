@@ -1,5 +1,5 @@
 const request = axios.create({
-  baseURL: "https://masader-web-service.herokuapp.com",
+  baseURL: "https://web-production-a8ed.up.railway.app",
 });
 
 function ethicalBadge(text) {
@@ -59,28 +59,7 @@ const shove = {
 };
 
 const entries = [
-  "Name",
-  "Link",
-  "Test Split",
-  "Cost",
-  "Host",
-  "Tokenized",
-  "Script",
-  "Provider",
-  "Collection Style",
-  "Form",
-  "Domain",
-  "Dialect",
-  "Tasks",
-  "Access",
-  "License",
-  "Language",
-  "Unit",
-  "Volume",
-  "Year",
-  "Ethical Risks",
-  "Id",
-  "Paper Link",
+  "Id","Name","Link","Colab link","GitHub Repo","Pricing","Accessibility","License","Version","Description","Paper Title","Paper URL","Release Year","Tasks","Supported language(s)","Tool Type","Interface","Programming Language","Evaluated datasets"
 ];
 
 const queries = new URLSearchParams(window.location.search);
@@ -141,9 +120,8 @@ form.addEventListener("submit", (event) => {
           ...(isProvided("name")
             ? [`Name.str.contains('(?i)${queries.get("name")}')`]
             : []),
-          ...(isProvided("dialect") ? [`Dialect.str.contains('(?i)${queries.get("dialect")}')`] : []),
           ...(isProvided("license") ? [`License.str.contains('(?i)${queries.get("license")}')`] : []),
-          ...(isProvided("access") ? [`Access.str.contains('(?i)${queries.get("access")}')`] : []),
+          ...(isProvided("pricing") ? [`Pricing.str.contains('(?i)${queries.get("pricing")}')`] : []),
           ...(isProvided("since") ? [`Year > ${queries.get("since")}`] : []),
           ...(isProvided("afore") ? [`Year < ${queries.get("afore")}`] : []),
           ...(listOfToggable.size > 0
@@ -175,7 +153,7 @@ form.addEventListener("submit", (event) => {
         html += `<span class='truncate'>${element.Id}</span>`;
           html += "</div>";
         for (let attribute in element) {
-          if (["Id", "Ethical Risks", "Paper Link", "Link", "Name"].includes(attribute))
+          if (["Id", "Pricing", "Paper URL", "Link", "Name"].includes(attribute))
             continue;
           html += "<div class='flex justify-between gap-3'>";
           html += `<span class='font-bold capitalize text-gray-600 whitespace-nowrap'>${attribute}</span>`;
@@ -187,12 +165,12 @@ form.addEventListener("submit", (event) => {
         html += "</div>";
 
         html += "<div class='flex justify-between'>";
-        html += `<span class='capitalize font-bold'> Ethical Risks ${ethicalBadge(element["Ethical Risks"])} </span>`;
+        html += `<span class='capitalize font-bold'> Ethical Risks ${ethicalBadge(element["Pricing"])} </span>`;
         html += "<div/>";
 
         html += "<div class='gap-2 flex'>";
         html += `<a class='capitalize font-bold text-primary' target='_blank' href='./card?id=${element["Id"]}'>details</a>`;
-        html += `<a class='capitalize font-bold text-primary' target='_blank' href='${element["Paper Link"]}'>paper link</a>`;
+        html += `<a class='capitalize font-bold text-primary' target='_blank' href='${element["Paper URL"]}'>paper link</a>`;
         html += "</div>";
 
         html += "</li>";
@@ -209,7 +187,7 @@ form.addEventListener("submit", (event) => {
 (() => {
   const queries = new URLSearchParams();
 
-  queries.set("features", ["Dialect", "Tasks", "Access", "License"]);
+  queries.set("features", ["Tasks", "Pricing", "License"]);
 
   request
     .get(`datasets/tags?${queries}`)
