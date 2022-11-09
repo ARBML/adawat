@@ -4,10 +4,8 @@ const request = axios.create({
 
 function ethicalBadge(text) {
   text = text.toLowerCase();
-  if (text == 'low') return '<span class="badge bg-success">Low</span>';
-  else if (text == 'medium')
-      return '<span class="badge bg-warning">Medium</span>';
-  else return '<span class="badge bg-danger text-light">High</span>';
+  if (text == 'free') return '<span class="badge bg-success">Free</span>';
+  else return '<span class="badge bg-danger text-light">Paid</span>';
 }
 
 function accessBadge(text) {
@@ -165,7 +163,7 @@ form.addEventListener("submit", (event) => {
         html += "</div>";
 
         html += "<div class='flex justify-between'>";
-        html += `<span class='capitalize font-bold'> Ethical Risks ${ethicalBadge(element["Pricing"])} </span>`;
+        html += `<span class='capitalize font-bold'> Pricing ${ethicalBadge(element["Pricing"])} </span>`;
         html += "<div/>";
 
         html += "<div class='gap-2 flex'>";
