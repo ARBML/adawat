@@ -1,5 +1,5 @@
 const url = 'https://web-production-a8ed.up.railway.app/datasets';
-const contributers_url = 'https://web-production-a8ed.up.railway.app/datasets/tags?features=Added By'
+const contributers_url = 'https://web-production-a8ed.up.railway.app/datasets/tags?features=Added by'
 
 function linkuize(text, link, short = true) {
     if (link != undefined && link != 'nan')
@@ -153,7 +153,7 @@ async function fomratDetails(data, index){
              url: contributers_url,
              method: 'get',
          }) 
-         return res.data["Added By"].length
+         return res.data["Added by"].length
      }
      catch (err) {
          console.error(err);
