@@ -51,6 +51,17 @@ function reformat_numbers(num) {
     } else return values[0] + 'M';
 }
 
+function reformat_version(num) {
+    values = num.split('.');
+    if (num == "nan")
+        return ""
+    if (values.length == 2) {
+        return num+".0";
+    } else if (values.length == 1) {
+        return num+".0.0";
+    } else return num;
+}
+
 async function getDetails(id) {
   return axios.get(url+"/"+id).then(response => response.data)
 }
@@ -207,6 +218,7 @@ axios
             if (row['HF Link'] != 'nan') {
                 link_host += '</br>' + linkuize(getIcon('hf'), row['HF Link']);
             }
+            console.log(row["Version"])
             dataset.push({
                 0: index + 1,
                 1: index + 1,
@@ -214,7 +226,7 @@ axios
                 3: createColab(row["Colab link"]),
                 4: parseInt(row['Release Year']),
                 5: row["License"],
-                6: row["Version"],
+                6: reformat_version(row["Version"]),
                 7: row["Programming Language"],
                 8: linkuize(row['Paper Title'], row['Paper URL']),
                 9: badgeRender(row['Pricing']),
