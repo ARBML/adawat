@@ -60,10 +60,9 @@ function itemize(text) {
 }
 
 function createColab(link){
-    return `<a href=${link}>
-    <img src="https://colab.research.google.com/assets/colab-badge.svg" width = '400px' >
-  </a>`
+    return `<a href=${link}> <img src="https://colab.research.google.com/assets/colab-badge.svg" width = '400px' target = "_blank"></a>`
 }
+
 function badgeRender(text) {
     text = text.toString().toLowerCase();
     if (text.toLowerCase() == 'free')
@@ -105,12 +104,12 @@ async function getOGimage(url) {
         return preview
     }
     else
-    return "./assets/images/logo.png"
+    return ""
 }
 
 async function fomratDetails(data, index){
     await getOGimage(data['Link']).then(res => {
-        return (res) ? image = res : image = "./assets/images/logo.png"
+        return (res) ? image = res : image = ""
 
     })
   return '<div class="grid grid-cols-4">'+
@@ -210,7 +209,7 @@ axios
         let headersWhiteList = [
             'No.',
             'Name',
-            'Colab Link',
+            'Links',
             'Year',
             'License',
             'Version',
@@ -243,18 +242,21 @@ axios
         let dataset = [];
         for (let index = 0; index < rows.length; index++) {
             const row = rows[index];
-            var host = row['Host']
-            if (host == 'other') host = "External Link"
-            let link_host = linkuize(host, row['Link']);
-            if (row['HF Link'] != 'nan') {
-                link_host += '</br>' + linkuize(getIcon('hf'), row['HF Link']);
+            var link_host = ""
+            if (row["Link"].includes("github"))
+                 link_host += linkuize("GitHub", row['Link']);
+            else
+                link_host += linkuize("External Link", row['Link']);
+            if (row['Colab link'] != 'nan') {
+                link_host += '</br>' + createColab(row['Colab link']);
             }
+             
 
             dataset.push({
                 0: index + 1,
                 1: index + 1,
                 2: linkuize(row['Name'], `card.html?id=${row['Id']}`, false),
-                3: createColab(row["Colab link"]),
+                3: link_host,
                 4: parseInt(row['Release Year']),
                 5: row["License"],
                 6: reformat_version(row["Version"]),
