@@ -6,7 +6,37 @@ function linkuize(text, link, short = true) {
         return `<a href = "${link}" target="_blank" class="#${(short) ? "shorterText " : ""}underline"> ${text}</a>`;
     else return 'Not Available';
 }
+datasetNames = {}
 
+async function getNames(index){
+    const url = `https://masader-web-service.herokuapp.com/datasets/${index}?features=Name`
+    console.log(url)
+    try {
+        let res = await axios({
+             url: url,
+             method: 'get',
+         }) 
+         return res.data["Name"]
+     }
+     catch (err) {
+         console.error(err);
+     }
+
+}
+
+async function getDatasetsLinks(datasets, ItemIndex){
+    datasets.split(",").forEach((index)=>{
+        if (Number.isInteger(parseInt(index))){
+            getNames(index).then((res)=>{
+                if (document.getElementById(`eval${ItemIndex}`).innerHTML.length == 0)
+                    document.getElementById(`eval${ItemIndex}`).innerHTML += linkuize(res,`https://arbml.github.io/masader/?card=${index}`)
+                else
+                    document.getElementById(`eval${ItemIndex}`).innerHTML += ","+linkuize(res,`https://arbml.github.io/masader/?card=${index}`)
+            })
+        }
+    })
+    return ""
+}
 function getIcon(text) {
     const lower = text.toLowerCase();
     if (icons[lower] != undefined || icons[lower] != 'nan') {
@@ -78,7 +108,6 @@ async function getOGimage(url) {
 }
 
 async function fomratDetails(data, index){
-    // console.log(data, "s")
     await getOGimage(data['Link']).then(res => {
         return (res) ? image = res : image = "./assets/images/logo.png"
 
@@ -144,9 +173,9 @@ async function fomratDetails(data, index){
                         '<span class="text-gray-400">Interface</span>'+
                         '<span class="text-gray-800">'+data['Interface'] +'</span>'+
                     '</div>'+
-                    ' <div class="grid grid-cols-2  ">'+
+                    ' <div class="grid grid-cols-2 ">'+
                         '<span class="text-gray-400">Evaluated datasets</span>'+
-                        '<span class="text-gray-800">'+data['Evaluated datasets'] +'</span>'+
+                        '<span class="text-gray-800"'+ `id = "eval${index}"`+'>'+ await getDatasetsLinks(data['Evaluated datasets'], index) +'</span>'+
                     '</div>'+
                 '</div>'+
                 '<div class="collapse-footer flex justify-end gap-x-5 mt-7">'+
@@ -209,6 +238,7 @@ axios
         // console.log(headers);
 
         //  Createing table data
+   
         let dataset = [];
         for (let index = 0; index < rows.length; index++) {
             const row = rows[index];
@@ -218,7 +248,7 @@ axios
             if (row['HF Link'] != 'nan') {
                 link_host += '</br>' + linkuize(getIcon('hf'), row['HF Link']);
             }
-            console.log(row["Version"])
+
             dataset.push({
                 0: index + 1,
                 1: index + 1,
