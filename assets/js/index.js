@@ -60,7 +60,7 @@ function itemize(text) {
 }
 
 function createColab(link){
-    return `<a href=${link}> <img src="https://colab.research.google.com/assets/colab-badge.svg" width = '400px' target = "_blank"></a>`
+    return `<a href=${link} target="_blank"> <img src="https://colab.research.google.com/assets/colab-badge.svg" width = '400px'></a>`
 }
 
 function badgeRender(text) {
