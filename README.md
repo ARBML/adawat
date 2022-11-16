@@ -78,10 +78,6 @@ which gives the following output
 
 Note: Navigate to the publishing source for MASADER site. For more information about publishing sources, [see](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#publishing-sources-for-github-pages-sites).
 
-## Web Service 
-
-Masader depends on a set of end points provided by our [web service](https://github.com/ARBML/masader-webservice).
-
 ## Contribution
 
 The catalogue will be updated regularly. If you want to add a new tool, use this [form](https://docs.google.com/forms/d/e/1FAIpQLScj-kGwZiniqjYk82z_yeqEgM7xtJ3Kfl1a2ITfgkMtKkVt0g/viewform).
