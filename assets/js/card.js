@@ -83,7 +83,7 @@ axios
     .then(function (response) {
         let headers = [];
         let headersWhiteList = [
-            "Id","Name","Link","Colab link","GitHub Repo","Pricing","Accessibility","License","Version","Description","Paper Title","Paper URL","Release Year","Tasks","Supported language(s)","Tool Type","Interface","Programming Language","Evaluated datasets","Cluster","Embeddings"
+            "Id","Name","Link","Colab link","GitHub Repo","Pricing","Accessibility","License","Version","Description","Paper Title","Paper URL","Release Year","Tasks","Supported language(s)","Tool Type","Interface","Programming Language","Evaluated datasets"
         ];
 
         $('.loading-spinner').hide();
