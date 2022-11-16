@@ -30,9 +30,9 @@ async function getDatasetsLinks(datasets, ItemIndex){
             getNames(index).then((res)=>{
                 var element = document.getElementById(`eval${ItemIndex}`)
                 if (element.innerHTML.length == 0)
-                    element.innerHTML += linkuize(res,`https://arbml.github.io/masader/card?id=${index}`)
+                    element.innerHTML += linkuize(res.trim(),`https://arbml.github.io/masader/card?id=${index}`)
                 else
-                    element.innerHTML += ","+linkuize(res,`https://arbml.github.io/masader/card?id=id=${index}`)
+                    element.innerHTML += ","+linkuize(res.trim(),`https://arbml.github.io/masader/card?id=id=${index}`)
             })
         }
     })
@@ -133,25 +133,21 @@ async function fomratDetails(data, index){
                         '<span class="text-gray-400">Version</span>'+
                         '<span class="text-gray-800">'+data['Version'] +'</span>'+
                     '</div>'+
-                    ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Accessibility</span>'+
-                        '<span class="text-gray-800">'+data['UnAccessibilityit'] +'</span>'+
-                    '</div>'+
-                    ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Supported language(s)</span>'+
-                        '<span class="text-gray-800">'+data['Supported language(s)'] +'</span>'+
-                    '</div>'+
                     ' <div class=" grid grid-cols-2 ">'+
                         '<span class="text-gray-400">License</span>'+
                         '<span class="text-gray-800">'+data['License'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Accessibility</span>'+
-                        '<span class="text-gray-800">'+data['Accessibility'] +'</span>'+
+                        '<span class="text-gray-400">Supported language(s)</span>'+
+                        '<span class="text-gray-800">'+data['Supported language(s)'] +'</span>'+
+                    '</div>'+
+                    ' <div class="grid grid-cols-2 ">'+
+                        '<span class="text-gray-400">Evaluated datasets</span>'+
+                        '<span class="text-gray-800"'+ `id = "eval${index}"`+'>'+ await getDatasetsLinks(data['Evaluated datasets'], index) +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
-                        '<span class="text-gray-400">Tasks</span>'+
-                        '<span class="text-gray-800">'+data['Tasks'] +'</span>'+
+                        '<span class="text-gray-400">Accessibility</span>'+
+                        '<span class="text-gray-800">'+data['Accessibility'] +'</span>'+
                     '</div>'+
                     ' <div class="grid grid-cols-2  ">'+
                         '<span class="text-gray-400">Language</span>'+
@@ -173,10 +169,7 @@ async function fomratDetails(data, index){
                         '<span class="text-gray-400">Interface</span>'+
                         '<span class="text-gray-800">'+data['Interface'] +'</span>'+
                     '</div>'+
-                    ' <div class="grid grid-cols-2 ">'+
-                        '<span class="text-gray-400">Evaluated datasets</span>'+
-                        '<span class="text-gray-800"'+ `id = "eval${index}"`+'>'+ await getDatasetsLinks(data['Evaluated datasets'], index) +'</span>'+
-                    '</div>'+
+                    
                 '</div>'+
                 '<div class="collapse-footer flex justify-end gap-x-5 mt-7">'+
                 '<a href="'+`card?id=${index}`+ '" class="underline font-normal">Details</a>'+
