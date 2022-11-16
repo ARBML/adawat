@@ -28,10 +28,11 @@ async function getDatasetsLinks(datasets, ItemIndex){
     datasets.split(",").forEach((index)=>{
         if (Number.isInteger(parseInt(index))){
             getNames(index).then((res)=>{
-                if (document.getElementById(`eval${ItemIndex}`).innerHTML.length == 0)
-                    document.getElementById(`eval${ItemIndex}`).innerHTML += linkuize(res,`https://arbml.github.io/masader/?card=${index}`)
+                var element = document.getElementById(`eval${ItemIndex}`)
+                if (element.innerHTML.length == 0)
+                    element.innerHTML += linkuize(res,`https://arbml.github.io/masader/card?id=${index}`)
                 else
-                    document.getElementById(`eval${ItemIndex}`).innerHTML += ","+linkuize(res,`https://arbml.github.io/masader/?card=${index}`)
+                    element.innerHTML += ","+linkuize(res,`https://arbml.github.io/masader/card?id=id=${index}`)
             })
         }
     })
