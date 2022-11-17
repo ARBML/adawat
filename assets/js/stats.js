@@ -8,8 +8,8 @@ let dialectedEntries = {};
 titles = {
     'Release Year': 'Number of tools published every year',
     Tasks: 'Top 20 tasks solved by tools',
-    License: 'Linceses used in Arabic NLP datasets',
-    Pricing: 'Venues used to publish NLP datasets',
+    License: 'Linceses used in Arabic NLP tools',
+    Pricing: 'Venues used to publish NLP tools',
     'GitHub Repo': 'Number of tools that have a GitHub repo',
     'Programming Language': 'Programming Languages used to create tools'
 };
